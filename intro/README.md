@@ -8,6 +8,7 @@ Please make sure all group members clearly stated. As we discussed in class you 
 
 ## How to run file
  
-``` R 					# This is to start the interactive session of R
+``` 
+	R 					# This is to start the interactive session of R
 	source("main.R") 	# This will load the R file into the current session
 ```
