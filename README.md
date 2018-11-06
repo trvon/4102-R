@@ -4,6 +4,10 @@
 
 ## Repository Structure
 - intro/
-
 	Initial Assignment
 
+- project/
+	This is our semester term project
+	TODO:
+	- [ ] Build functions for handling data with R
+	- [ ] Build functions for handling scraped data
