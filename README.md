@@ -11,7 +11,7 @@
 	TODO:
 	- [ ] Build functions for handling data with R
 		- [ ] Handle reading live scraped data
-		- Functions that show features in data
+		Functions that show features in data
 		- [ ] Predictive pricing (per data, or best price)
 		- [ ] Best price of items
 	- [ ] Build functions for handling scraped data
@@ -23,7 +23,8 @@
 	### Building 
 	I have been testing everything within a UNIX environment. To start
 	environment run:
-	``` ./build.sh 
+	``` 
+	./build.sh 
 	```
 
 	### Dependencies
