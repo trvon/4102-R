@@ -23,6 +23,13 @@ DIR=$(pwd)
 cd SCRAPE/crawler && scrapy crawl AmazonProduct
 cd $DIR && Rscript main.R 
 
-# Stop Container
+# Clean Container
 # docker stop postgres
-# docker ps -l | awk '{print $2}' | tail -n+2 | xargs -I {} docker stop {}
+# docker rm postgres
+echo -n "\nWould you like to clean the docker image?(Y/n)\n"
+read answer
+
+case "$answer" in 
+	n|N) docker stop postgres && docker rm postgres;;
+	*) echo "Exiting!";;
+esac

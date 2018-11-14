@@ -31,3 +31,9 @@
 	- docker
 	- python3
 	- R
+
+	#### Debian Specific
+	```
+	# apt install libpq-dev python3 python3-pip libcurl4-openssl-dev
+	# pip install Scapy
+	```

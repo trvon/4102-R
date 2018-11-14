@@ -21,6 +21,7 @@ class CrawlerPipeline(object):
             self.cur.execute("CREATE TABLE items (id varchar PRIMARY KEY, sale_price varchar, category varchar);")
         except:
             print("TABLE already created")
+        self.connection.commit()
 
     def close_spider(self, spider):
         self.connection.close()

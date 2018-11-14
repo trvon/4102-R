@@ -6,14 +6,11 @@ class AmazonproductSpider(scrapy.Spider):
     name = 'AmazonProduct'
     allowed_domains = ['amazon.com']
     start_urls = ["https://www.amazon.com/MSI-RTX-2080-GAMING-TRIO/dp/B07GHXQTGZ",
-                  "https://www.amazon.com/Nintendo-Switch-Neon-Red-Blue-Joy/dp/B01MUAGZ49",
                   "https://www.amazon.com/PlayStation-4-Slim-1TB-Console/dp/B071CV8CG2?th=1",
                   "https://www.amazon.com/AMD-Threadripper-32-thread-Processor-YD195XA8AEWOF/dp/B074CBH3R4",
                   "https://www.amazon.com/Redragon-KUMARA-Backlit-Mechanical-Keyboard/dp/B016MAK38U",
                   "http://www.amazon.com/Apple-MacBook-Version-1-8GHz-128GB/dp/B07738WFFN",
                   "https://www.amazon.com/Black-Passport-Portable-External-Drive/dp/B01LQQHF2W",
-                  "https://www.amazon.com/Samsung-Inch-Internal-MZ-76E1T0B-AM/dp/B078DPCY3T",
-                  "https://www.amazon.com/Samsung-960-EVO-Internal-MZ-V6E1T0BW",
                   "https://www.amazon.com/Roku-Streaming-Stick-Player-Wireless/dp/B075XLWML4"
     ]
 
