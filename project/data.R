@@ -29,10 +29,13 @@ con <- dbConnect(drv, dbname="postgres",
 				 user="postgres", password=pass)
 
 # Removes the password variable
-rm(pw)
+rm(pass)
 
 # Check for scraped data
-dbExistsTable(con, "data")
+dbExistsTable(con, "items")
+
+# Database data
+Idata <- dbGetQuery(con, "select * from items")
 
 # Writes static data
 

@@ -16,11 +16,12 @@ if [ -z "$(command -v python3)" ]; then
 fi
 
 # Install requirements for python
-pip install -r SCRAPE/requirements.txt
+pip3 install -r SCRAPE/requirements.txt
 
 # Run R and python files
-python SCRAPE/main.py & Rscript main.R && fg
-# Rscript main.R
+DIR=$(pwd)
+cd SCRAPE/crawler && scrapy crawl AmazonProduct
+cd $DIR && Rscript main.R 
 
 # Stop Container
 # docker stop postgres
