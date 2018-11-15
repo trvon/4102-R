@@ -18,7 +18,7 @@ class CrawlerPipeline(object):
                                            dbname=database)
         self.cur = self.connection.cursor()
         try:
-            self.cur.execute("CREATE TABLE items (id varchar PRIMARY KEY, sale_price varchar, category varchar);")
+            self.cur.execute("CREATE TABLE items (id varchar PRIMARY KEY, sale_price varchar, category varchar, date varchar);")
         except:
             print("TABLE already created")
         self.connection.commit()
@@ -28,7 +28,8 @@ class CrawlerPipeline(object):
         self.cur.close()
     
     def process_item(self, item, spider):
-        self.cur.execute("insert into items(id, sale_price, category) values(%s, %s, %s)", (item['product_name'], item['product_sale_price'].replace('$',''), item['product_category']))
+        self.cur.execute("insert into items(id, sale_price, category, date) values(%s, %s, %s, %s)", (item['product_name'], item['product_sale_price'].replace('$',''),
+                                                                                                      item['product_category'], item['product_date']))
 
         self.connection.commit()
         return item
