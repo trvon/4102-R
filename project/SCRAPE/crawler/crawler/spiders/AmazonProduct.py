@@ -8,7 +8,6 @@ class AmazonproductSpider(scrapy.Spider):
     allowed_domains = ['amazon.com']
     start_urls = ["https://www.amazon.com/MSI-RTX-2080-GAMING-TRIO/dp/B07GHXQTGZ",
                   "https://www.amazon.com/PlayStation-4-Slim-1TB-Console/dp/B071CV8CG2?th=1",
-                  "https://www.amazon.com/PlayStation-4-Slim-1TB-Console/dp/B071CV8CG2?th=1",
                   "https://www.amazon.com/AMD-Threadripper-32-thread-Processor-YD195XA8AEWOF/dp/B074CBH3R4",
                   "https://www.amazon.com/Redragon-KUMARA-Backlit-Mechanical-Keyboard/dp/B016MAK38U",
                   "http://www.amazon.com/Apple-MacBook-Version-1-8GHz-128GB/dp/B07738WFFN",
