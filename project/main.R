@@ -4,11 +4,9 @@
 source("data.R")
 
 # Summarize Black Friday data
-# summary(BFdata)
-
-# Summarize Retail data
-# summary(Rdata)
-
+summary(VGdata)
+names(VGdata)
 # Summarize Items data
 # summary(Idata)
-Idata
+# Display's data
+# Idata

@@ -14,30 +14,29 @@ lapply(packages, require, character.only = TRUE)
 
 # fileEncoding = "UTF-8-BOM"
 # Loading Static Data
-BFdata <- read.csv("DATA/BlackFriday.csv", header=FALSE)
-Rdata <- read.csv("DATA/RetailData.csv", header=FALSE)
+VGdata <- read.csv("DATA/VideoGamesSales.csv", header=TRUE)
+
+
+
+##
+## Database Magic
+##
 
 # Connecting to Database to load Live Data
 pass <- { "r_password" }
 
 # Loads PostgreSQL drive
 drv <- dbDriver("PostgreSQL")
-
 # Creates connection to database
 con <- dbConnect(drv, dbname="postgres", 
 				 host="0.0.0.0", port="5432",
 				 user="postgres", password=pass)
-
 # Removes the password variable
 rm(pass)
-
 # Check for scraped data
 dbExistsTable(con, "items")
-
 # Database data
 Idata <- dbGetQuery(con, "select * from items")
-
-# Writes static data
 
 # Close connection 
 dbDisconnect(con)
