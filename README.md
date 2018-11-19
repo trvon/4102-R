@@ -10,10 +10,19 @@
 	This is our semester term project
 	TODO:
 	- [ ] Build functions for handling data with R
-		- [ ] Handle reading live scraped data
-		Functions that show features in data
-		- [ ] Predictive pricing (per data, or best price)
-		- [ ] Best price of items
+		- [ ] Critics Scores vs User Scores
+			- [ ] Region specific
+			- [ ] Publisher/Developer specific
+		- [ ] Region vs Genre
+			- [ ] Sales vs. Averge Critic/User score
+			- [ ] Platform vs. Region
+		- [ ] Year of release
+			- [ ] vs. Genre
+			- [ ] vs. Platform
+		- [ ] Popularity
+			- [ ] Genre vs. Year
+			- [ ] Genre vs. Region
+
 	- [ ] Build functions for handling scraped data
 		- [x] Connect Python Scaper to Postgres Docker Image
 		- [ ] Move Scraped data into database
