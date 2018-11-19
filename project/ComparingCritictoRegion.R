@@ -1,0 +1,16 @@
+
+
+VGS <- read.csv("C:/Users/Merlin/Downloads/4102-R-master/project/DATA/VGS.csv")
+#VGSales <- read.csv("C:/Users/Merlin/Downloads/4102-R-master/project/DATA/vgsales.csv")
+head(VGSales)
+library(dplyr)
+#library(Hmisc)
+library(pastecs)
+options(scipen = 100)
+options(digits = 2)
+#stat.desc(VGsales[,c("NA_Sales", "EU_Sales","JP_Sales","Other_Sales","Global_Sales")])
+stat.desc(VGS[,c("NA_Sales", "EU_Sales","JP_Sales","Other_Sales","Global_Sales","Critic_Score","Critic_Count","User_Score","User_Count")])
+library(corrplot)
+num.cols <- sapply(na.omit(VGS), is.numeric)
+cor.data <- cor(na.omit(VGS)[,num.cols])
+corrPLOT <- corrplot(cor.data,method = 'square')
