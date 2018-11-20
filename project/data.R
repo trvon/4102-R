@@ -1,7 +1,7 @@
 # This file is for Data Sanitization and Data aggregation
 
 # Checking if packages are already installed
-packages <- c("DMwR", "RPostgreSQL") # Add Packages here
+packages <- c("DMwR", "knitr") # Add Packages here
 # Passing arguments to script
 
 # Installin Packages
@@ -13,32 +13,32 @@ if(length(new.packages)) {
 lapply(packages, require, character.only = TRUE)
 
 # fileEncoding = "UTF-8-BOM"
-# Loading Static Data
+# Loading Video Data
 VGdata <- read.csv("DATA/VideoGamesSales.csv", header=TRUE)
 
 
-
-##
-## Database Magic
-##
+#
+# Database Magic
+#
 
 # Connecting to Database to load Live Data
-pass <- { "r_password" }
+# pass <- { "r_password" }
 
 # Loads PostgreSQL drive
-drv <- dbDriver("PostgreSQL")
+# drv <- dbDriver("PostgreSQL")
 # Creates connection to database
-con <- dbConnect(drv, dbname="postgres", 
-				 host="0.0.0.0", port="5432",
-				 user="postgres", password=pass)
+#con <- dbConnect(drv, dbname="postgres", 
+#				 host="0.0.0.0", port="5432",
+#				 user="postgres", password=pass)
+
 # Removes the password variable
-rm(pass)
+# rm(pass)
 # Check for scraped data
-dbExistsTable(con, "items")
+# dbExistsTable(con, "items")
 # Database data
-Idata <- dbGetQuery(con, "select * from items")
+# Idata <- dbGetQuery(con, "select * from items")
 
 # Close connection 
-dbDisconnect(con)
+# dbDisconnect(con)
 # Unloads Driver
-dbUnloadDriver(drv)
+# dbUnloadDriver(drv)
