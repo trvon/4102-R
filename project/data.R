@@ -43,20 +43,24 @@ CMdata <- CMdata[order(CMdata$Combined_Rating, decreasing=TRUE), ]
 # Scores table
 Sdata <- VGdata["Name"]
 Sdata["Rating"] <- VGdata["Rating"]
-Sdata["Global_Sales"] <- VGdata["Global_Sales"]
 
 # Region Specific
 # Changes year to numeric value
-VGdata$Year_of_Release <- as.integer(VGdata$Year_of_Release)
-# Sorts table by year
-YVGdata <- VGdata[order(VGdata$Year_of_Release),]
+VGdata$Year_of_Release <- as.numeric(as.character(VGdata$Year_of_Release))
+YVGdata <- VGdata
 
 #################
 # 	Functions 	#
 #################
-
 # Function that returns a table based on the rating
-ratingType <- function(rating) {
+ratingType <- function(rating, region) {
+	# Adds the Region sales to the table
+	switch(region,
+		"NA" = { Sdata['Sales'] <- VGdata['NA_Sales'] },
+		"EU" = { Sdata['Sales'] <- VGdata['EU_Sales'] },
+		"JP" = { Sdata['Sales'] <- VGdata['JP_Sales'] },
+		"Other" = {	Sdata['Sales'] <- VGdata['Other_Sales'] }
+	)
 	# Return table with Critic ratings
 	if(rating == "Critic") {
 		Sdata["Critic_Score"] <- VGdata["Critic_Score"]
@@ -80,9 +84,9 @@ yearRange <- function(year, range) {
 	# Creating a table with the year range passed
 	max <- year + range
 	# Getting year subset in range selected
-	Ydata <- YVGdata[YVGdata$Year_of_Release >= year & YVGdata$Year_of_Release <= max,]
+	tempTable <- YVGdata[YVGdata$Year_of_Release >= year & YVGdata$Year_of_Release <= max,]
 	# initializing table
 	# Ydata <- null
-	# Ydata <- count(tempTable, Year_of_Release, Genre)
+	Ydata <- count(tempTable, c('Year_of_Release', 'Genre'))
 	return(Ydata)
 }

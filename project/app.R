@@ -6,7 +6,7 @@ server <- function(input, output) {
 			"Publisher" = Publisher,
 			"Genre" = yearRange(input$year, input$range),
 			# Selects table passed on table returned from function
-			"Rating" = ratingType(input$ratingsMethod))
+			"Rating" = ratingType(input$ratingsMethod, input$regionSales))
 	})
 	
 	# Generate a summary of the dataset
@@ -32,7 +32,8 @@ ui <- pageWithSidebar(
 		# Checks if Rating has been selected
 		conditionalPanel(
 			condition = "input.dataset == 'Rating'",
-			selectInput("ratingsMethod", "Scores", list("Critic", "User", "Combined"))
+			selectInput("ratingsMethod", "Scores", list("Critic", "User", "Combined")),
+			selectInput("regionSales", "Region Sales", list("NA", "EU", "JP", "Other"))
 		),
 		# Checks if Genre has been selected
 		conditionalPanel(
