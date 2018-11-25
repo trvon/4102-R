@@ -1,13 +1,12 @@
-library(shiny)
 source("data.R")
 
 server <- function(input, output) {
 	datasetInput <- reactive({
 		switch(input$dataset,
 			"Publisher" = Publisher,
-			"Name" = Name,
-			"Platform" = Platform,
-			"Rating" = CMdata)
+			"Genre" = yearRange(input$year, input$range),
+			# Selects table passed on table returned from function
+			"Rating" = ratingType(input$ratingsMethod))
 	})
 	
 	# Generate a summary of the dataset
@@ -22,18 +21,35 @@ server <- function(input, output) {
 	})
 }
 
-ui <- shinyUI(pageWithSidebar(
+ui <- pageWithSidebar(
 	headerPanel("Video Games"),
 	sidebarPanel(
+		# Data selection
 		selectInput("dataset", "Filter by:",
-			choices = c("Publisher", "Name", "Platform", "Rating")),
-		numericInput("obs", "Number of Games:", 10)
+			choices = c("Publisher", "Genre", "Rating")),
+		# The amount of data shown
+		numericInput("obs", "Number of Games:", 10),
+		# Checks if Rating has been selected
+		conditionalPanel(
+			condition = "input.dataset == 'Rating'",
+			selectInput("ratingsMethod", "Scores", list("Critic", "User", "Combined"))
+		),
+		# Checks if Genre has been selected
+		conditionalPanel(
+			condition = "input.dataset == 'Genre'",
+			sliderInput("year", "Year of Release:",
+				min = 1980, max = 2017, value = 1980),
+			sliderInput("range", "Year range:",
+				min = 1, max = 10, value = 5)
+		)
 	),
+
 	mainPanel(
-		verbatimTextOutput("summary"),
+		# verbatimTextOutput("summary"),
 		tableOutput("view")
 	)
-))
+)
 
+# Creates Shiny APP object and starts server
 app <- shinyApp(ui = ui, server = server)
 runApp(app)
