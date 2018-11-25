@@ -7,7 +7,10 @@ fi
 
 if [ -z "$(docker ps -l | grep postgres)" ]; then
 	# Run docker
-	sudo docker run --name postgres -e POSTGRES_PASSWORD=r_password -d --network host postgres # -U postgres
+	## Selenium Server
+	sudo docker run -d -p 4445:4444 --name selenium selenium/standalone-firefox:2.53.1
+	## Database
+	# sudo docker run --name postgres -e POSTGRES_PASSWORD=r_password -d --network host postgres # -U postgres
 fi
 
 # HOST=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' postgres)
@@ -33,6 +36,7 @@ echo -e "\nWould you like to clean the docker image?(Y/n)\n"
 read answer
 
 case "$answer" in 
-	y|Y) 1>/dev/null docker stop postgres && 1>/dev/null docker rm postgres && echo "Container and data deleted" ;;
+	# y|Y) 1>/dev/null docker stop postgres && 1>/dev/null docker rm postgres && echo "Container and data deleted" ;;
+	y|Y) 1>/dev/null docker stop selenium ;;
 	*) echo "Exiting!";;
 esac

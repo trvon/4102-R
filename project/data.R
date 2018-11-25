@@ -1,7 +1,7 @@
 # This file is for Data Sanitization and Data aggregation
 
 # Checking if packages are already installed
-packages <- c("DMwR", "knitr") # Add Packages here
+packages <- c("DMwR", "shiny") # Add Packages here
 # Passing arguments to script
 
 # Installin Packages
@@ -16,29 +16,26 @@ lapply(packages, require, character.only = TRUE)
 # Loading Video Data
 VGdata <- read.csv("DATA/VideoGamesSales.csv", header=TRUE)
 
+# Summarize Black Friday data
+# summary[VGdata]
+names(VGdata)
 
-#
-# Database Magic
-#
+## Score Comparison
+# Normalizing Scores
+VGdata$Critic_Score <- as.character(VGdata$Critic_Score)
+VGdata$User_Score <- as.character(VGdata$User_Score)
 
-# Connecting to Database to load Live Data
-# pass <- { "r_password" }
+# Changing NA values to 0
+VGdata[is.na(VGdata)] <- 0
+VGdata[is.na(VGdata)] <- 0
 
-# Loads PostgreSQL drive
-# drv <- dbDriver("PostgreSQL")
-# Creates connection to database
-#con <- dbConnect(drv, dbname="postgres", 
-#				 host="0.0.0.0", port="5432",
-#				 user="postgres", password=pass)
+# Changing values to numbers
+VGdata$Critic_Score <- as.numeric(VGdata$Critic_Score) / 10
+VGdata$User_Score <- as.numeric(VGdata$User_Score)
 
-# Removes the password variable
-# rm(pass)
-# Check for scraped data
-# dbExistsTable(con, "items")
-# Database data
-# Idata <- dbGetQuery(con, "select * from items")
-
-# Close connection 
-# dbDisconnect(con)
-# Unloads Driver
-# dbUnloadDriver(drv)
+# Summing the average of the Critic and Users scores
+CMdata <- VGdata["Name"]
+CMdata["Rating"] <- VGdata["Rating"]
+CMdata["Combined_Rating"] <- VGdata['Critic_Score'] + VGdata['User_Score']
+# Sorting data
+CMdata <- CMdata[order(CMdata$Combined_Rating, decreasing=TRUE), ]
