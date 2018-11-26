@@ -25,7 +25,7 @@ server <- function(input, output) {
 		switch(input$dataset,
 			"Publisher" = { plot(data$Publisher)},
 			"Genre" = { plot(data$Genre) }, # , data[input$regionSales]) },
-			"Rating" = { plot(data$Sales, data$Combined_Rating)} # , data[input$ratingsMethod]) }
+			"Rating" = { plot(data$Sales, data$Score)} # , data[input$ratingsMethod]) }
 		)
 	})
 }

@@ -67,17 +67,17 @@ ratingType <- function(rating, region) {
 	Sdata['Sales'] <- as.numeric(as.character(Sdata$Sales))
 	# Return table with Critic ratings
 	if(rating == "Critic") {
-		Sdata["Critic_Score"] <- VGdata["Critic_Score"]
+		Sdata["Score"] <- VGdata["Critic_Score"]
 		Sdata["Combined_Rating"] <- VGdata['Critic_Score'] + VGdata['User_Score']
 		# Returns table ordered by score
-		return(Sdata[order(Sdata$Critic_Score, decreasing=TRUE), ])
+		return(Sdata[order(Sdata$Score, decreasing=TRUE), ])
 	}
 	# Return table with User ratings	
 	else if (rating == "User") {
-		Sdata["User_Score"] <- VGdata["User_Score"]
+		Sdata["Score"] <- VGdata["User_Score"]
 		Sdata["Combined_Rating"] <- VGdata['Critic_Score'] + VGdata['User_Score']
 		# Returns table ordered by score
-		return(Sdata[order(Sdata$User_Score, decreasing=TRUE), ])
+		return(Sdata[order(Sdata$Score, decreasing=TRUE), ])
 	}
 }
 
