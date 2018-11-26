@@ -3,7 +3,7 @@ source("data.R")
 server <- function(input, output) {
 	datasetInput <- reactive({
 		switch(input$dataset,
-			"Publisher" = Publisher,
+			"Publisher" = publisherData(input$genre),
 			"Genre" = yearRange(input$year, input$range, input$region),
 			# Selects table passed on table returned from function
 			"Rating" = ratingType(input$ratingsMethod, input$regionSales))
@@ -23,7 +23,7 @@ server <- function(input, output) {
 	output$plot <- renderPlot({
 		data <- datasetInput()
 		switch(input$dataset,
-			"Publisher" = { },
+			"Publisher" = { plot(data$Publisher)},
 			"Genre" = { plot(data$Genre) }, # , data[input$regionSales]) },
 			"Rating" = { plot(data$Sales, data$Combined_Rating)} # , data[input$ratingsMethod]) }
 		)
@@ -52,11 +52,16 @@ ui <- pageWithSidebar(
 			sliderInput("range", "Year range:",
 				min = 1, max = 10, value = 5),
 			selectInput("region", "Region Sales", list("NA", "EU", "JP", "Other"))
+		),
+		# Check if publisher has been selected
+		conditionalPanel(
+			condition = "input.dataset == 'Publisher'",
+			selectInput("genre", "Select Genre", list("Sports", "Platform", "Racing", "Role-Playing", "Puzzle", "Shooter", "Action", "Adventure", "Simulation"))
 		)
 	),
 
 	mainPanel(
-		verbatimTextOutput("summary"),
+		# verbatimTextOutput("summary"),
 		plotOutput("plot"),
 		tableOutput("view")
 	)

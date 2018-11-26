@@ -34,10 +34,22 @@ Sdata["Rating"] <- VGdata["Rating"]
 Sdata["Global_Sales"] <- as.numeric(as.character(VGdata["Global_Sales"]))
 # Combined Scores table
 
-# Region Specific
+## Region Specific
 # Changes year to numeric value
 VGdata$Year_of_Release <- as.numeric(as.character(VGdata$Year_of_Release))
 YVGdata <- VGdata[order(VGdata$Year_of_Release),]
+
+## Publisher Specific
+# Creating table for publisher
+Pdata <- VGdata["Publisher"]
+Pdata["Developer"] <- VGdata["Developer"]
+Pdata["Year_of_Release"] <- as.numeric(as.character(VGdata["Year_of_Release"]))
+Pdata["Critic_Score"] <- VGdata["Critic_Score"]
+Pdata["User_Score"] <- VGdata["User_Score"]
+Pdata["Global_Sales"] <- VGdata["Global_Sales"]
+Pdata["Genre"] <- VGdata["Genre"]
+# Remove Columns with NAN's
+# Pdata <- Pdata[colSums(!is.na(Pdata))  ]
 
 #################
 # 	Functions 	#
@@ -69,7 +81,7 @@ ratingType <- function(rating, region) {
 	}
 }
 
-# Function returns table based on year selection
+# Function that returns table based on year selection
 yearRange <- function(year, range, region) {
 	# Creating a table with the year range passed
 	switch(region,
@@ -86,4 +98,13 @@ yearRange <- function(year, range, region) {
 	# Aggregates the data based on similar year and Genre while summing other columns :D
 	Ydata <- aggregate(. ~ Year_of_Release + Genre + freq, Ydata, sum)
 	return(Ydata)
+}
+
+# Function that returns table based on publisher settings
+publisherData <- function(genre) {
+	Pdata <- Pdata[order(Pdata$Year_of_Release),]
+	Pdata <- Pdata[Pdata$Genre == genre,]
+	# Pdata <- count(Pdata, c('Publisher', 'Genre', 'Year_of_Release', 'Global_Sales'))	
+	# Pdata <- aggregate(. ~ Publisher +  Genre + Year_of_Release, Pdata, sum)
+	return(Pdata)
 }
